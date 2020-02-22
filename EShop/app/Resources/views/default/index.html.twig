@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+        <h3><b>Products table:</b></h3>
+        <table border="1" class="table table-hover">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Tags</th>
+                <th>Country</th>
+                <th>Options</th>
+            </tr>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.category.name }}</td>
+                    <td>{{ product.tags|join(',')}}</td>
+                    <td>{{ product.country|join(',')}}</td>
+                    <td><a href="{{ path('edit',{'id':product.id}) }}" class="badge badge-info">edit</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">No rows</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    <a href="new" class="badge badge-primary">
+        <button type="button" class="btn btn-info"><b>Add new product</b></button>
+    </a>
+
+{% endblock %}
+
+
+

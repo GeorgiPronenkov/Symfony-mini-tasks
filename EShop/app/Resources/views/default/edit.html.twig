@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{{ form(form) }}
+
+    <script>
+        $(document).ready(function () {
+            $( "#country" ).autocomplete({
+                source: "/api/countries",
+                select:function (event, ui) {
+                    $('#country').val(ui.item.country_name);
+                    return false;
+                }
+            }).data('uiAutocomplete')
+                ._renderItem = function (ul,item) {
+                    return $( "<li></li>" ).data("item.autocomplete", item)
+                    .append(item.country_name)
+                    .appendTo( ul );
+            };
+        });
+    </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{% endblock %}
+
